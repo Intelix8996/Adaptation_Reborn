@@ -92,6 +92,7 @@ ModelImporter:
     100172: Spine
     100174: TongueBack
     100176: TongueTip
+    100178: Reference
     400000: Chest
     400002: Head
     400004: HeadTop_End
@@ -181,8 +182,10 @@ ModelImporter:
     400172: Spine
     400174: TongueBack
     400176: TongueTip
+    400178: Reference
     7400000: Take 001
     9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -195,7 +198,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
+      does not match:\n\tTransform 'mixamorig:Hips' for human bone 'Hips' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -679,11 +683,16 @@ ModelImporter:
     skeleton:
     - name: HumanoidRunTurn(Clone)
       parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Reference
+      parentName: HumanoidRunTurn(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Hips
-      parentName: HumanoidRunTurn(Clone)
+      parentName: Reference
       position: {x: -0.0021772385, y: 0.9575601, z: -0.054921582}
       rotation: {x: 0.02468006, y: -0.030952968, z: 0.023100708, w: 0.99894905}
       scale: {x: 1, y: 1, z: 1}
@@ -1132,9 +1141,10 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: d7e7ac26c8864204490706bcdd418cc7,
+    type: 3}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0

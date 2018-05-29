@@ -79,6 +79,7 @@ ModelImporter:
     100146: Spine
     100148: TongueBack
     100150: TongueTip
+    100152: Reference
     400000: Chest
     400002: Head
     400004: Hips
@@ -155,8 +156,10 @@ ModelImporter:
     400146: Spine
     400148: TongueBack
     400150: TongueTip
-    7400000: Take 001
+    400152: Reference
+    7400000: Idle
     9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -184,7 +187,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 1100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -653,11 +684,16 @@ ModelImporter:
     skeleton:
     - name: HumanoidIdle(Clone)
       parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Reference
+      parentName: HumanoidIdle(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Hips
-      parentName: HumanoidIdle(Clone)
+      parentName: Reference
       position: {x: 0.0005251169, y: 0.96055585, z: -0.0022978783}
       rotation: {x: -0.025176069, y: -0.0013111659, z: -0.00571906, w: 0.99966586}
       scale: {x: 1, y: 1, z: 1}
@@ -1041,9 +1077,10 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: d7e7ac26c8864204490706bcdd418cc7,
+    type: 3}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0
