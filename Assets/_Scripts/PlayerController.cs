@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour {
 
+    [SyncVar]
     float x, y, vx, vy;
 
     Animator am;
@@ -65,6 +66,15 @@ public class PlayerController : NetworkBehaviour {
 
     private void LateUpdate()
     {
-        NeckBone.transform.localEulerAngles = cam.transform.localEulerAngles;
+        if (!isLocalPlayer)
+            return;
+
+        CmdApplyHeadTransform(cam.transform.localEulerAngles);
+    }
+
+    [Command]
+    void CmdApplyHeadTransform(Vector3 transform)
+    {
+        NeckBone.transform.localEulerAngles = transform;
     }
 }
