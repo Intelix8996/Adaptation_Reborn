@@ -5,10 +5,10 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour {
 
-    [SyncVar]
     float x, y, vx, vy;
 
     Animator am;
+    Rigidbody rb;
 
     [SerializeField]
     Camera cam;
@@ -22,10 +22,16 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField]
     float ClampAngleX = 90, ClampAngleY = 90;
 
+    [SerializeField]
+    bool Airbone = false;
+
+    [SerializeField]
+    float JumpForce = 10;
 
     private void Start()
     {
         am = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -47,8 +53,34 @@ public class PlayerController : NetworkBehaviour {
             if (Input.GetKey(KeyCode.LeftShift))
                 y += .5f;
 
-            am.SetFloat("X", x);
-            am.SetFloat("Y", y);
+            if (Input.GetKey(KeyCode.Space))
+            {
+                rb.AddForce(Vector3.up * JumpForce);
+            }
+
+            if (Airbone)
+                am.applyRootMotion = false;
+            else
+                am.applyRootMotion = true;
+
+            if ((vx > ClampAngleX - 10 || vx < -ClampAngleX + 10) && !Input.GetKey(KeyCode.LeftAlt))
+            {
+                am.Play("Grounded_Turn");
+
+                am.SetFloat("X", vx / ClampAngleX);
+                am.SetFloat("Y", y);
+            }
+            else
+            {
+                am.Play("Grounded");
+
+
+                if (!Input.GetKey(KeyCode.LeftAlt))
+                    transform.eulerAngles += new Vector3(0, Input.GetAxis("Mouse X"), 0);
+
+                am.SetFloat("X", x);
+                am.SetFloat("Y", y);
+            }
         }
         else
         {
@@ -66,15 +98,13 @@ public class PlayerController : NetworkBehaviour {
 
     private void LateUpdate()
     {
-        if (!isLocalPlayer)
-            return;
-
-        CmdApplyHeadTransform(cam.transform.localEulerAngles);
+        if (isLocalPlayer && Input.GetKey(KeyCode.LeftAlt))
+            CmdApplyHeadRotation(new Vector3(-vy, vx, 0));
     }
 
     [Command]
-    void CmdApplyHeadTransform(Vector3 transform)
+    void CmdApplyHeadRotation (Vector3 _transform)
     {
-        NeckBone.transform.localEulerAngles = transform;
+        NeckBone.transform.localEulerAngles = _transform;
     }
 }

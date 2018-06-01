@@ -172,8 +172,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
-      does not match:\n\tTransform 'mixamorig:Hips' for human bone 'Hips' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -192,8 +191,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Walk_Turn_Right
       takeName: Take 001
-      firstFrame: 1
-      lastFrame: 44
+      firstFrame: 13
+      lastFrame: 46
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
