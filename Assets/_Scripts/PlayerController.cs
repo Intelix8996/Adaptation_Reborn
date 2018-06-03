@@ -63,7 +63,7 @@ public class PlayerController : NetworkBehaviour {
             else
                 am.applyRootMotion = true;
 
-            if ((vx > ClampAngleX - 10 || vx < -ClampAngleX + 10) && !Input.GetKey(KeyCode.LeftAlt))
+            if (x == 0 && y == 0 && !Input.GetKey(KeyCode.LeftAlt))
             {
                 am.Play("Grounded_Turn");
 
@@ -74,9 +74,10 @@ public class PlayerController : NetworkBehaviour {
             {
                 am.Play("Grounded");
 
-
                 if (!Input.GetKey(KeyCode.LeftAlt))
+                {
                     transform.eulerAngles += new Vector3(0, Input.GetAxis("Mouse X"), 0);
+                }
 
                 am.SetFloat("X", x);
                 am.SetFloat("Y", y);
