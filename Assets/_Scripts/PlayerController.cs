@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour {
 
-    float x, y, vx, vy;
+    float moveX, moveY, moveX_Target, moveY_Target, viewX, viewY;
 
     Animator am;
     Rigidbody rb;
@@ -22,66 +22,52 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField]
     float ClampAngleX = 90, ClampAngleY = 90;
 
-    [SerializeField]
-    bool Airbone = false;
-
-    [SerializeField]
-    float JumpForce = 10;
-
     private void Start()
     {
         am = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+
+        Cursor.visible = false;
     }
 
     private void FixedUpdate()
     {
         if (isLocalPlayer)
         {
-            x = Input.GetAxis("Horizontal");
-            y = Input.GetAxis("Vertical");
+            moveX_Target = Input.GetAxis("Horizontal");
+            moveY_Target = Input.GetAxis("Vertical");
 
-            if ((vx + Input.GetAxis("Mouse X") * Sens < ClampAngleX) &&
-               (vx + Input.GetAxis("Mouse X") * Sens > -ClampAngleX) &&
-               (vy + Input.GetAxis("Mouse Y") * Sens < ClampAngleY) &&
-               (vy + Input.GetAxis("Mouse Y") * Sens > -ClampAngleY))
+            if ((viewX + Input.GetAxis("Mouse X") * Sens < ClampAngleX) &&
+               (viewX + Input.GetAxis("Mouse X") * Sens > -ClampAngleX) &&
+               (viewY + Input.GetAxis("Mouse Y") * Sens < ClampAngleY) &&
+               (viewY + Input.GetAxis("Mouse Y") * Sens > -ClampAngleY))
             {
-                vx += Input.GetAxis("Mouse X") * Sens;
-                vy += Input.GetAxis("Mouse Y") * Sens;
+                viewX += Input.GetAxis("Mouse X") * Sens;
+                viewY += Input.GetAxis("Mouse Y") * Sens;
             }
 
             if (Input.GetKey(KeyCode.LeftShift))
-                y += .5f;
+                moveY_Target += .5f;
 
-            if (Input.GetKey(KeyCode.Space))
-            {
-                rb.AddForce(Vector3.up * JumpForce);
-            }
+            //if ((x == 0 && y == 0 && !Input.GetKey(KeyCode.LeftAlt)) && (vx > ClampAngleX - 15 || vx < -ClampAngleX + 15))
+            //{
+            //    am.Play("Grounded_Turn");
+            //
+            //    am.SetFloat("X", vx / ClampAngleX);
+            //   am.SetFloat("Y", y);
+            //}
+            //else
+            //{
+            am.Play("Grounded");
 
-            if (Airbone)
-                am.applyRootMotion = false;
-            else
-                am.applyRootMotion = true;
+            StartCoroutine("Lerp");
 
-            if (x == 0 && y == 0 && !Input.GetKey(KeyCode.LeftAlt))
-            {
-                am.Play("Grounded_Turn");
+            if (!Input.GetKey(KeyCode.LeftAlt))
+                transform.eulerAngles += new Vector3(0, Input.GetAxis("Mouse X") * Sens, 0);
 
-                am.SetFloat("X", vx / ClampAngleX);
-                am.SetFloat("Y", y);
-            }
-            else
-            {
-                am.Play("Grounded");
-
-                if (!Input.GetKey(KeyCode.LeftAlt))
-                {
-                    transform.eulerAngles += new Vector3(0, Input.GetAxis("Mouse X"), 0);
-                }
-
-                am.SetFloat("X", x);
-                am.SetFloat("Y", y);
-            }
+            am.SetFloat("X", moveX);
+            am.SetFloat("Y", moveY);
+            //}
         }
         else
         {
@@ -94,18 +80,40 @@ public class PlayerController : NetworkBehaviour {
         }
 
 
-        cam.transform.localEulerAngles = new Vector3(-vy, vx, 0);
+        cam.transform.localEulerAngles = new Vector3(-viewY, 0, 0);
     }
 
     private void LateUpdate()
     {
         if (isLocalPlayer && Input.GetKey(KeyCode.LeftAlt))
-            CmdApplyHeadRotation(new Vector3(-vy, vx, 0));
+            CmdApplyHeadRotation(new Vector3(-viewY, viewX, 0));
     }
 
     [Command]
     void CmdApplyHeadRotation (Vector3 _transform)
     {
         NeckBone.transform.localEulerAngles = _transform;
+    }
+
+    IEnumerator Lerp()
+    {
+        if (moveY < moveY_Target)
+        {
+            for (float i = moveY; i < moveY_Target; i += 0.05f)
+            {
+                moveY = i;
+
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+        else if (moveY > moveY_Target)
+        {
+            for (float i = moveY; i > moveY_Target; i -= 0.05f)
+            {
+                moveY = i;
+
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
     }
 }

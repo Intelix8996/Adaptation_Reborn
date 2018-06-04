@@ -260,7 +260,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4012079522317132}
-  - component: {fileID: 114825944914615366}
   m_Layer: 0
   m_Name: CC_Base_Spine02
   m_TagString: Untagged
@@ -4434,38 +4433,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1610368181952870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 255
-    i1: 25
-    i2: 10
-    i3: 149
-    i4: 14
-    i5: 28
-    i6: 247
-    i7: 36
-    i8: 106
-    i9: 177
-    i10: 44
-    i11: 92
-    i12: 245
-    i13: 14
-    i14: 95
-    i15: 214
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114825944914615366
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1085060325942866}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
