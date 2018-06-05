@@ -16,6 +16,15 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField]
     GameObject NeckBone;
 
+    [SerializeField]
+    bool isAirbone = false;
+
+    [SerializeField]
+    float JumpForce = 6f;
+
+    [SerializeField]
+    float AirboneRaycastDistance = 1f;
+
     [Header("Camera")]
     [SerializeField]
     float Sens = 10;
@@ -32,6 +41,8 @@ public class PlayerController : NetworkBehaviour {
 
     private void FixedUpdate()
     {
+        isAirbone = Airbone_Check_Raycast(AirboneRaycastDistance);
+
         if (isLocalPlayer)
         {
             moveX_Target = Input.GetAxis("Horizontal");
@@ -49,6 +60,20 @@ public class PlayerController : NetworkBehaviour {
             if (Input.GetKey(KeyCode.LeftShift))
                 moveY_Target += .5f;
 
+            if (Input.GetKeyDown(KeyCode.Space) && !isAirbone)
+            {
+                isAirbone = true;
+
+                am.applyRootMotion = false;
+
+                rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            }
+
+            if (isAirbone)
+                am.applyRootMotion = false;
+            else
+                am.applyRootMotion = true;
+
             //if ((x == 0 && y == 0 && !Input.GetKey(KeyCode.LeftAlt)) && (vx > ClampAngleX - 15 || vx < -ClampAngleX + 15))
             //{
             //    am.Play("Grounded_Turn");
@@ -58,7 +83,6 @@ public class PlayerController : NetworkBehaviour {
             //}
             //else
             //{
-            am.Play("Grounded");
 
             StartCoroutine("Lerp");
 
@@ -67,6 +91,7 @@ public class PlayerController : NetworkBehaviour {
 
             am.SetFloat("X", moveX);
             am.SetFloat("Y", moveY);
+            am.SetBool("Airbone", isAirbone);
             //}
         }
         else
@@ -78,7 +103,6 @@ public class PlayerController : NetworkBehaviour {
 
             cam.enabled = false;
         }
-
 
         cam.transform.localEulerAngles = new Vector3(-viewY, 0, 0);
     }
@@ -99,7 +123,7 @@ public class PlayerController : NetworkBehaviour {
     {
         if (moveY < moveY_Target)
         {
-            for (float i = moveY; i < moveY_Target; i += 0.05f)
+            for (float i = moveY; i <= moveY_Target; i += 0.05f)
             {
                 moveY = i;
 
@@ -108,12 +132,20 @@ public class PlayerController : NetworkBehaviour {
         }
         else if (moveY > moveY_Target)
         {
-            for (float i = moveY; i > moveY_Target; i -= 0.05f)
+            for (float i = moveY; i >= moveY_Target; i -= 0.05f)
             {
                 moveY = i;
 
                 yield return new WaitForSeconds(0.01f);
             }
         }
+    }
+
+    bool Airbone_Check_Raycast(float distance)
+    {
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, distance))
+            return false;
+        else
+            return true;
     }
 }

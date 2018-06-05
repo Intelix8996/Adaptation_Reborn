@@ -4422,11 +4422,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 20762028507319890}
   NeckBone: {fileID: 1805215923568134}
+  isAirbone: 0
+  JumpForce: 6
+  AirboneRaycastDistance: 1.1
   Sens: 1
   ClampAngleX: 40
   ClampAngleY: 35
-  Airbone: 0
-  JumpForce: 10
 --- !u!114 &114737643995528146
 MonoBehaviour:
   m_ObjectHideFlags: 1
