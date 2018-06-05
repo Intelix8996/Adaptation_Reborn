@@ -540,12 +540,17 @@ Transform:
   m_GameObject: {fileID: 1404003401}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalRotation: {x: -0.23957638, y: 0.30650064, z: 0.08004081, w: 0.917744}
   m_LocalPosition: {x: 580.4352, y: -24.115993, z: 923.9688}
 =======
   m_LocalRotation: {x: -0.013191405, y: 0.9130763, z: 0.4064971, w: 0.029629823}
   m_LocalPosition: {x: 693.1479, y: -575.3497, z: 1369.0386}
 >>>>>>> parent of eb5dc4e... Merge branch 'master'
+=======
+  m_LocalRotation: {x: -0.23957638, y: 0.30650064, z: 0.08004081, w: 0.917744}
+  m_LocalPosition: {x: 580.4352, y: -24.115993, z: 923.9688}
+>>>>>>> parent of 843e889... Added jump and airbone mecenics
 =======
   m_LocalRotation: {x: -0.23957638, y: 0.30650064, z: 0.08004081, w: 0.917744}
   m_LocalPosition: {x: 580.4352, y: -24.115993, z: 923.9688}
