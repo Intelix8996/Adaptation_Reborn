@@ -1345,7 +1345,6 @@ GameObject:
   - component: {fileID: 124830313471970802}
   - component: {fileID: 81344642220915954}
   - component: {fileID: 114332376859904386}
-  - component: {fileID: 114965768538446762}
   - component: {fileID: 54181950837425682}
   m_Layer: 0
   m_Name: Main Camera
@@ -4425,7 +4424,7 @@ MonoBehaviour:
   isAirbone: 0
   JumpForce: 6
   AirboneRaycastDistance: 1.2
-  Sens: 1
+  Sensitivity: 1
   ClampAngleX: 40
   ClampAngleY: 35
 --- !u!114 &114737643995528146
@@ -4460,19 +4459,6 @@ MonoBehaviour:
     i15: 214
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114965768538446762
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1596284736582736}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ee3f1bc7d40c1b4bbb2d8ea64bcf290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Origin: {fileID: 4282292904377190}
-  Offset: {x: 0, y: 0.1, z: 0.1}
 --- !u!124 &124830313471970802
 Behaviour:
   m_ObjectHideFlags: 1
