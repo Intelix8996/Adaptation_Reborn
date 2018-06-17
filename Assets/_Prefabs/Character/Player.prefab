@@ -4375,8 +4375,8 @@ MonoBehaviour:
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  m_InterpolateRotation: 2
+  m_InterpolateMovement: 2
 --- !u!114 &114298256197596944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4421,6 +4421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 20762028507319890}
   NeckBone: {fileID: 1805215923568134}
+  JawBone: {fileID: 1701819061948754}
   isAirbone: 0
   JumpForce: 6
   AirboneRaycastDistance: 1.2

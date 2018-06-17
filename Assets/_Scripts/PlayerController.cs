@@ -15,7 +15,7 @@ public class PlayerController : NetworkBehaviour
     Camera cam;
 
     [SerializeField]
-    GameObject NeckBone;
+    GameObject NeckBone, JawBone;
 
     [SerializeField]
     bool isAirbone = false;
@@ -112,6 +112,8 @@ public class PlayerController : NetworkBehaviour
     {
         if (isLocalPlayer && Input.GetKey(KeyCode.LeftAlt))
             CmdApplyHeadRotation(new Vector3(-viewY, viewX, 0));
+
+        JawBone.transform.localEulerAngles = new Vector3(0, 0, -48.694f);
     }
 
     [Command]
